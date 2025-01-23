@@ -12,6 +12,13 @@ services:
         delay: 10s
       restart_policy:
         condition: on-failure
+      update_failure_action: rollback
+      rollback_failure_action: pause
+      rollback_order: stop-first
+      update_monitor: 5s
+      update_max_failure_ratio: 0
+      health_retries: 3
+      health_timeout: 30s
   db:
     image: postgres:9.4
     environment:
@@ -24,6 +31,13 @@ services:
     deploy:
       placement:
         constraints: [node.role == manager]
+      update_failure_action: rollback
+      rollback_failure_action: pause
+      rollback_order: stop-first
+      update_monitor: 5s
+      update_max_failure_ratio: 0
+      health_retries: 3
+      health_timeout: 30s
   vote:
     image: dockersamples/examplevotingapp_vote:before
     ports:
@@ -38,6 +52,13 @@ services:
         parallelism: 2
       restart_policy:
         condition: on-failure
+      update_failure_action: rollback
+      rollback_failure_action: pause
+      rollback_order: stop-first
+      update_monitor: 5s
+      update_max_failure_ratio: 0
+      health_retries: 3
+      health_timeout: 30s
   result:
     image: dockersamples/examplevotingapp_result:before
     ports:
@@ -53,7 +74,13 @@ services:
         delay: 10s
       restart_policy:
         condition: on-failure
-
+      update_failure_action: rollback
+      rollback_failure_action: pause
+      rollback_order: stop-first
+      update_monitor: 5s
+      update_max_failure_ratio: 0
+      health_retries: 3
+      health_timeout: 30s
   worker:
     image: dockersamples/examplevotingapp_worker
     networks:
@@ -73,6 +100,13 @@ services:
         window: 120s
       placement:
         constraints: [node.role == manager]
+      update_failure_action: rollback
+      rollback_failure_action: pause
+      rollback_order: stop-first
+      update_monitor: 5s
+      update_max_failure_ratio: 0
+      health_retries: 3
+      health_timeout: 30s
 
   visualizer:
     image: dockersamples/visualizer:stable
@@ -84,6 +118,13 @@ services:
     deploy:
       placement:
         constraints: [node.role == manager]
+      update_failure_action: rollback
+      rollback_failure_action: pause
+      rollback_order: stop-first
+      update_monitor: 5s
+      update_max_failure_ratio: 0
+      health_retries: 3
+      health_timeout: 30s
 
 networks:
   frontend:
